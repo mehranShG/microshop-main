@@ -3,9 +3,10 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    AppModule,
-    {
+  const app = await NestFactory.create(AppModule)
+
+  const microservice =
+    await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
       transport: Transport.RMQ,
       options: {
         urls: [process.env.RABBIT],
@@ -14,12 +15,10 @@ async function bootstrap() {
           durable: false,
         },
       },
-    },
-  )
-  app.listen()
-}
-/*const app = await NestFactory.create(AppModule)
+    })
+  microservice.listen()
   await app.listen(8001)
-  console.log('connected at %s', await app.getUrl())
-}*/
+  console.log('server started at %s', await app.getUrl())
+}
+
 bootstrap()
