@@ -14,7 +14,15 @@ export class ProductService {
     return this.productModel.find().exec()
   }
 
-  async create(data): Promise<Product> {
-    return new this.productModel(data).save()
+  async create(product): Promise<Product> {
+    return new this.productModel(product).save()
+  }
+
+  async findOne(id: number): Promise<Product> {
+    return this.productModel.findOne({ id })
+  }
+
+  async update(id: number, product): Promise<any> {
+    await this.productModel.findOneAndUpdate({ id }, product)
   }
 }

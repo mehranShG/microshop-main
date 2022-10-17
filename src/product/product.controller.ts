@@ -12,11 +12,22 @@ export class ProductController {
     return this.productService.getAll()
   }
   @EventPattern('product_created')
-  async create(product: any) {
+  async productCreate(product: any) {
     const createDto = new CreateDto()
+    createDto.id = product.id
     createDto.title = product.title
     createDto.image = product.image
     createDto.likes = product.likes
     this.productService.create(createDto)
+  }
+
+  @EventPattern('product_updated')
+  async productUpdated(product: any) {
+    const createDto = new CreateDto()
+    createDto.id = product.id
+    createDto.title = product.title
+    createDto.image = product.image
+    createDto.likes = product.likes
+    this.productService.update(product.id, createDto)
   }
 }
