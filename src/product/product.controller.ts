@@ -28,6 +28,11 @@ export class ProductController {
     createDto.title = product.title
     createDto.image = product.image
     createDto.likes = product.likes
-    this.productService.update(product.id, createDto)
+    await this.productService.update(product.id, createDto)
+  }
+
+  @EventPattern('product_deleted')
+  async productDeleted(id: number) {
+    await this.productService.delete(id)
   }
 }

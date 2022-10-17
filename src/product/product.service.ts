@@ -25,4 +25,8 @@ export class ProductService {
   async update(id: number, product): Promise<any> {
     await this.productModel.findOneAndUpdate({ id }, product)
   }
+
+  async delete(id: number) {
+    await this.productModel.deleteOne({ id })
+  }
 }
