@@ -16,10 +16,7 @@ async function bootstrap() {
       },
     },
   )
-  app.listen(),
-    () => {
-      console.log('Microservice is listening')
-    }
+  app.listen()
 }
 /*const app = await NestFactory.create(AppModule)
   await app.listen(8001)

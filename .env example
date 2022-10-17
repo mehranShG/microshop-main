@@ -1,7 +1,5 @@
-# Mongo
-
+#Mongo
 DB_MONGO=mongodb://localhost:27017/nest_main
 
-# RabbitMq
-
+#RabbitMq
 RABBIT=amqp://localhost:5672
