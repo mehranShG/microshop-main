@@ -1,3 +1,4 @@
+import { CreateDto } from 'src/dtos/product.dto'
 import { Controller, Get } from '@nestjs/common'
 import { EventPattern } from '@nestjs/microservices'
 import { ProductService } from './product.service'
@@ -10,8 +11,12 @@ export class ProductController {
   getAll() {
     return this.productService.getAll()
   }
-  @EventPattern('hello')
-  async hello(data: string) {
-    console.log(data)
+  @EventPattern('product_created')
+  async create(product: any) {
+    const createDto = new CreateDto()
+    createDto.title = product.title
+    createDto.image = product.image
+    createDto.likes = product.likes
+    this.productService.create(createDto)
   }
 }
