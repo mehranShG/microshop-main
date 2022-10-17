@@ -8,7 +8,7 @@ async function bootstrap() {
     {
       transport: Transport.RMQ,
       options: {
-        urls: ['amqp://localhost:5672'],
+        urls: [process.env.RABBIT],
         queue: 'main_queue',
         queueOptions: {
           durable: false,
@@ -16,6 +16,10 @@ async function bootstrap() {
       },
     },
   )
+  app.listen(),
+    () => {
+      console.log('Microservice is listening')
+    }
 }
 /*const app = await NestFactory.create(AppModule)
   await app.listen(8001)
