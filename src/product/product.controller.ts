@@ -11,6 +11,7 @@ export class ProductController {
   getAll() {
     return this.productService.getAll()
   }
+
   @EventPattern('product_created')
   async productCreate(product: any) {
     const createDto = new CreateDto()
