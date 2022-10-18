@@ -1,5 +1,5 @@
 import { Model } from 'mongoose'
-import { Injectable } from '@nestjs/common'
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Product, ProductDocument } from '../schemas/product.model'
 
@@ -15,7 +15,15 @@ export class ProductService {
   }
 
   async create(product): Promise<Product> {
-    return new this.productModel(product).save()
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await new this.productModel(product).save()
+        resolve(result)
+      } catch (error) {
+        console.log(error.message)
+        reject(new HttpException('Something went wrong!', HttpStatus.CONFLICT))
+      }
+    })
   }
 
   async findOne(id: number): Promise<Product> {

@@ -1,8 +1,10 @@
 import { CreateDto } from 'src/dtos/product.dto'
-import { Controller, Get } from '@nestjs/common'
+import { Body, Controller, Get, Post } from '@nestjs/common'
 import { EventPattern } from '@nestjs/microservices'
+import { ApiTags } from '@nestjs/swagger'
 import { ProductService } from './product.service'
 
+@ApiTags('Products')
 @Controller('products')
 export class ProductController {
   constructor(private productService: ProductService) {}
@@ -12,14 +14,16 @@ export class ProductController {
     return this.productService.getAll()
   }
 
+  @Post()
   @EventPattern('product_created')
-  async productCreate(product: any) {
+  async productCreate(@Body() product: any) {
     const createDto = new CreateDto()
     createDto.id = product.id
     createDto.title = product.title
     createDto.image = product.image
     createDto.likes = product.likes
-    this.productService.create(createDto)
+    const result = await this.productService.create(createDto)
+    return result
   }
 
   @EventPattern('product_updated')

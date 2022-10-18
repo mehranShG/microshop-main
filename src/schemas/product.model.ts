@@ -7,13 +7,13 @@ export class Product {
   @Prop()
   id: number
 
-  @Prop()
+  @Prop({ required: true })
   title: string
 
-  @Prop()
-  image: string
+  @Prop({ default: 'placeholder' })
+  image?: string
 
   @Prop()
-  likes: string
+  likes?: string
 }
 export const ProductSchema = SchemaFactory.createForClass(Product)
