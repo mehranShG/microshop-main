@@ -7,7 +7,7 @@ export class Product {
   @Prop()
   id: number
 
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   title: string
 
   @Prop({ default: 'placeholder' })

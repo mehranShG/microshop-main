@@ -1,4 +1,5 @@
 import { Model } from 'mongoose'
+import { CreateDto } from 'src/dtos/product.dto'
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Product, ProductDocument } from '../schemas/product.model'
@@ -14,7 +15,7 @@ export class ProductService {
     return this.productModel.find().exec()
   }
 
-  async create(product): Promise<Product> {
+  async create(product: CreateDto): Promise<Product> {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await new this.productModel(product).save()
