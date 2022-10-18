@@ -4,8 +4,8 @@ export type ProductDocument = Product & Document
 
 @Schema()
 export class Product {
-  @Prop({ required: true })
-  id: number
+  @Prop({ required: true, unique: true, type: Number })
+  id: Number
 
   @Prop({ required: true, unique: true })
   title: string
