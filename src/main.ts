@@ -1,4 +1,5 @@
 import { config } from 'dotenv'
+import { ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
@@ -19,8 +20,12 @@ async function bootstrap() {
         },
       },
     })
-  microservice.listen()
 
+  // Validator
+  app.useGlobalPipes(new ValidationPipe())
+  microservice.useGlobalPipes(new ValidationPipe())
+
+  microservice.listen()
   // Loading Swagger
   const config = new DocumentBuilder()
     .setTitle('Microshop')
