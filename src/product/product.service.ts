@@ -34,7 +34,6 @@ export class ProductService {
   async update(id: number, product: UpdateDto): Promise<any> {
     return new Promise(async (resolve, reject) => {
       try {
-        console.log(id)
         const result = await this.productModel.findOneAndUpdate(
           { id: id },
           product,
@@ -49,6 +48,20 @@ export class ProductService {
   }
 
   async delete(id: number) {
-    await this.productModel.deleteOne({ id })
+    return new Promise(async (resolve, reject) => {
+      try {
+        const findProduct = await this.productModel.findOne({ id })
+        if (findProduct == null) {
+          reject(
+            new HttpException('Something went wrong!', HttpStatus.CONFLICT),
+          )
+        }
+        const result = await this.productModel.deleteOne({ id })
+        resolve(result)
+      } catch (error) {
+        console.log(error.message)
+        reject(new HttpException('Something went wrong!', HttpStatus.CONFLICT))
+      }
+    })
   }
 }

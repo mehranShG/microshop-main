@@ -1,5 +1,5 @@
 import { CreateDto, UpdateDto } from 'src/dtos/product.dto'
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { EventPattern } from '@nestjs/microservices'
 import { ApiTags } from '@nestjs/swagger'
 import { ProductService } from './product.service'
@@ -32,8 +32,9 @@ export class ProductController {
     await this.productService.update(id, product)
   }
 
+  @Delete(':id')
   @EventPattern('product_deleted')
-  async productDeleted(id: number) {
+  async productDeleted(@Param('id') id: number) {
     await this.productService.delete(id)
   }
 }
