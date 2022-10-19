@@ -29,7 +29,7 @@ export class ProductController {
   @Put(':id')
   @EventPattern('product_updated')
   async productUpdated(@Param('id') id: number, @Body() product: UpdateDto) {
-    await this.productService.update(id, product)
+    await this.productService.update((id = product.id), product)
   }
 
   @Delete(':id')

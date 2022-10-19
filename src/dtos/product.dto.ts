@@ -18,6 +18,8 @@ export class CreateDto {
 }
 
 export class UpdateDto {
+  id?: number
+
   @IsString()
   @ApiProperty()
   title: string
