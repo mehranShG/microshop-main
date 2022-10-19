@@ -19,7 +19,6 @@ export class ProductService {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await new this.productModel(product).save()
-
         resolve(result)
       } catch (error) {
         reject(new HttpException('Something went wrong!', HttpStatus.CONFLICT))

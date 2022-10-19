@@ -17,8 +17,6 @@ export class ProductController {
   @Post()
   @EventPattern('product_created')
   async productCreate(@Body() product: CreateDto) {
-    console.log(product)
-    console.log(1)
     const createDto = new CreateDto()
     createDto.id = product.id
     createDto.title = product.title
