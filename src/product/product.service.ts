@@ -37,7 +37,6 @@ export class ProductService {
           { id: id },
           product,
         )
-
         resolve(result)
       } catch (error) {
         console.log(error.message)

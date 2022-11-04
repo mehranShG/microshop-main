@@ -1,7 +1,7 @@
-import { CreateDto, UpdateDto } from 'src/dtos/product.dto'
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { EventPattern } from '@nestjs/microservices'
 import { ApiTags } from '@nestjs/swagger'
+import { CreateDto, UpdateDto } from '../dtos/product.dto'
 import { ProductService } from './product.service'
 
 @ApiTags('Products')
