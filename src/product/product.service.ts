@@ -1,7 +1,7 @@
 import { Model } from 'mongoose'
-import { CreateDto, UpdateDto } from 'src/dtos/product.dto'
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
+import { CreateDto, UpdateDto } from '../dtos/product.dto'
 import { Product, ProductDocument } from '../schemas/product.model'
 
 @Injectable()

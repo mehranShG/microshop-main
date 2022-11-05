@@ -1,18 +1,31 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { ProductService } from './product.service';
+import { getModelToken } from '@nestjs/mongoose'
+import { Test, TestingModule } from '@nestjs/testing'
+import { Product } from '../schemas/product.model'
+import { ProductService } from './product.service'
+
+class MockProductModel {
+  constructor(private data) {}
+  findOne = jest.fn((title) => {})
+  save = jest.fn().mockResolvedValue(this.data)
+
+  static findOne = jest.fn()
+}
 
 describe('ProductService', () => {
-  let service: ProductService;
+  let service: ProductService
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ProductService],
-    }).compile();
+      providers: [
+        ProductService,
+        { provide: getModelToken(Product.name), useValue: MockProductModel },
+      ],
+    }).compile()
 
-    service = module.get<ProductService>(ProductService);
-  });
+    service = module.get<ProductService>(ProductService)
+  })
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
-});
+    expect(service).toBeDefined()
+  })
+})
