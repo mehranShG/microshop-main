@@ -11,10 +11,19 @@ export class ProductService {
     private readonly productModel: Model<ProductDocument>,
   ) {}
 
+  /**
+   * Get all Products
+   * @returns product
+   */
   async getAll(): Promise<Product[]> {
     return this.productModel.find().exec()
   }
 
+  /**
+   * Save a product
+   * @param product
+   * @returns product
+   */
   async create(product: CreateDto): Promise<Product> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -26,10 +35,21 @@ export class ProductService {
     })
   }
 
+  /**
+   * Find a PRODUCT
+   * @param id
+   * @returns product
+   */
   async findOne(id: number): Promise<Product> {
     return this.productModel.findOne({ id })
   }
 
+  /**
+   * Update a product
+   * @param id
+   * @param product
+   * @returns
+   */
   async update(id: number, product: UpdateDto): Promise<any> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -45,6 +65,11 @@ export class ProductService {
     })
   }
 
+  /**
+   * Delete a product
+   * @param id
+   * @returns
+   */
   async delete(id: number) {
     return new Promise(async (resolve, reject) => {
       try {
