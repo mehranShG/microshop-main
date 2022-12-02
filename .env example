@@ -1,5 +1,8 @@
-#Mongo
+# Mongo
+
 DB_MONGO=mongodb://localhost:27017/nest_main
 
-#RabbitMq
-RABBIT=amqp://localhost:5672
+# Redis
+
+REDIS_HOST=localhost
+REDIS_PORT=6379
