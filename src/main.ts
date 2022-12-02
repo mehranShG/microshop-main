@@ -11,13 +11,10 @@ async function bootstrap() {
   // Starting RabbitMQ microservice
   const microservice =
     await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-      transport: Transport.RMQ,
+      transport: Transport.REDIS,
       options: {
-        urls: [process.env.RABBIT],
-        queue: 'main_queue',
-        queueOptions: {
-          durable: false,
-        },
+        host: 'localhost',
+        port: 6379,
       },
     })
 
@@ -35,7 +32,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('api', app, document)
 
-  await app.listen(6000)
+  await app.listen(8001)
   console.log('server started at %s', await app.getUrl())
 }
 
