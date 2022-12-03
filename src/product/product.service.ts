@@ -1,7 +1,7 @@
 import { Model } from 'mongoose'
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { CreateDto, UpdateDto } from '../dtos/product.dto'
+import { UpdateDto } from '../dtos/product.dto'
 import { Product, ProductDocument } from '../schemas/product.model'
 
 @Injectable()
@@ -24,13 +24,14 @@ export class ProductService {
    * @param product
    * @returns product
    */
-  async create(product: CreateDto): Promise<Product> {
+  async create(product: Product): Promise<Product> {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await new this.productModel(product).save()
         resolve(result)
-      } catch (error) {
-        reject(new HttpException('Something went wrong!', HttpStatus.CONFLICT))
+      } catch (err) {
+        reject(new HttpException('Something went wrong!', HttpStatus.CONFLICT)),
+          console.log(err.message)
       }
     })
   }

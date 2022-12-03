@@ -1,5 +1,6 @@
+import { Product } from 'src/schemas/product.model'
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
-import { EventPattern } from '@nestjs/microservices'
+import { EventPattern, MessagePattern } from '@nestjs/microservices'
 import { ApiTags } from '@nestjs/swagger'
 import { CreateDto, UpdateDto } from '../dtos/product.dto'
 import { ProductService } from './product.service'
@@ -15,11 +16,9 @@ export class ProductController {
   }
 
   @Post()
-  @EventPattern('product_created')
+  @MessagePattern({ name: 'product_created' })
   async productCreate(@Body() product: CreateDto) {
-    console.log(product)
-    const createDto = new CreateDto()
-    createDto.id = product.id
+    const createDto = new Product()
     createDto.title = product.title
     createDto.image = product.image
     createDto.likes = product.likes
