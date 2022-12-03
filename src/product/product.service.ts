@@ -24,7 +24,7 @@ export class ProductService {
    * @param product
    * @returns product
    */
-  async create(product: Product): Promise<Product> {
+  async addProduct(product: Product): Promise<Product> {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await new this.productModel(product).save()
