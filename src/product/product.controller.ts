@@ -16,8 +16,15 @@ export class ProductController {
   }
 
   @Get(':id')
-  @MessagePattern({ name: 'get_product' })
   getOne(@Param('id') id: number) {
+    return this.productService.getOne(id)
+  }
+
+  // Used with redis microservice
+  @Get(':id')
+  @MessagePattern({ name: 'get_product' })
+  getOneProduct(id: number) {
+    console.log(id)
     return this.productService.getOne(id)
   }
 
