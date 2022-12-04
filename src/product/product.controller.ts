@@ -15,6 +15,12 @@ export class ProductController {
     return this.productService.getAll()
   }
 
+  @Get(':id')
+  @MessagePattern({ name: 'get_product' })
+  getOne(@Param('id') id: number) {
+    return this.productService.getOne(id)
+  }
+
   @Post()
   @MessagePattern({ name: 'product_created' })
   async addProduct(@Body() product: CreateDto) {
@@ -36,6 +42,7 @@ export class ProductController {
   @Delete(':id')
   @MessagePattern({ name: 'product_deleted' })
   async productDeleted(@Param('id') id: number) {
-    await this.productService.delete(id)
+    const result = await this.productService.delete(id)
+    return result
   }
 }
