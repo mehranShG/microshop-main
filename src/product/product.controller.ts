@@ -11,6 +11,7 @@ export class ProductController {
   constructor(private productService: ProductService) {}
 
   @Get()
+  @MessagePattern({ name: 'all_product' })
   getAll() {
     return this.productService.getAll()
   }
