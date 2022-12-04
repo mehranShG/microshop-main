@@ -56,8 +56,14 @@ export class ProductController {
   }
 
   @Delete(':id')
-  @MessagePattern({ name: 'product_deleted' })
   async productDeleted(@Param('id') id: number) {
+    const result = await this.productService.delete(id)
+    return result
+  }
+
+  @Delete()
+  @MessagePattern({ name: 'product_deleted' })
+  async productDeleteRedis(id: number) {
     const result = await this.productService.delete(id)
     return result
   }

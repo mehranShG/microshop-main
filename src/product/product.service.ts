@@ -63,10 +63,7 @@ export class ProductService {
   async update(id: number, product: UpdateDto): Promise<any> {
     return new Promise(async (resolve, reject) => {
       try {
-        const result = await this.productModel.findOneAndUpdate(
-          { id: id },
-          product,
-        )
+        await this.productModel.findOneAndUpdate({ id: id }, product)
         const updatedProduct = await this.productModel.findOne({ id })
         resolve(updatedProduct)
       } catch (error) {
