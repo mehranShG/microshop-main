@@ -67,7 +67,8 @@ export class ProductService {
           { id: id },
           product,
         )
-        resolve(result)
+        const updatedProduct = await this.productModel.findOne({ id })
+        resolve(updatedProduct)
       } catch (error) {
         console.log(error.message)
         reject(new HttpException('Something went wrong!', HttpStatus.CONFLICT))

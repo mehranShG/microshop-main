@@ -41,9 +41,18 @@ export class ProductController {
   }
 
   @Put(':id')
-  @MessagePattern({ name: 'product_updated' })
   async productUpdated(@Param('id') id: number, @Body() product: UpdateDto) {
     return this.productService.update(id || product.id, product)
+  }
+
+  // Microservice
+  @Put()
+  @MessagePattern({ name: 'product_updated' })
+  async productUpdatedRedis(payload: object) {
+    const updateDto = new UpdateDto()
+    updateDto.image = payload['image']
+    updateDto.title = payload['title']
+    return this.productService.update(payload['id'], updateDto)
   }
 
   @Delete(':id')
