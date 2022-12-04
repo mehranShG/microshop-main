@@ -20,6 +20,15 @@ export class ProductService {
   }
 
   /**
+   * Gets product by id
+   * @param id
+   * @returns
+   */
+  async getOne(id: number) {
+    return this.productModel.findOne({ id })
+  }
+
+  /**
    * Save a product
    * @param product
    * @returns product
