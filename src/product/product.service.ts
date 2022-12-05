@@ -1,5 +1,5 @@
 import { Model } from 'mongoose'
-import { from, Observable } from 'rxjs'
+import { EMPTY, from, Observable } from 'rxjs'
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { UpdateDto } from '../dtos/product.dto'
@@ -17,7 +17,7 @@ export class ProductService {
    * @returns product
    */
   getAll(): Observable<Product[]> {
-    return from(this.productModel.find().exec()).pipe((x) => x)
+    return from(this.productModel.find().exec())
     //return this.productModel.find().exec()
   }
 
@@ -26,8 +26,12 @@ export class ProductService {
    * @param id
    * @returns
    */
-  async getOne(id: number) {
-    return this.productModel.findOne({ id })
+  getOne(id: number): Observable<Product> {
+    const foundProduct = from(this.productModel.findOne({ id }))
+    if (foundProduct) {
+      return from(foundProduct)
+    }
+    return EMPTY
   }
 
   /**
