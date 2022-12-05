@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AuthModule } from './auth/auth.module'
+import { AuthEntity } from './entities/auth.entity'
 import { ProductModule } from './product/product.module'
 
 @Module({
@@ -18,7 +19,7 @@ import { ProductModule } from './product/product.module'
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [],
+        entities: [AuthEntity],
         synchronize: true,
       }),
       inject: [ConfigService],

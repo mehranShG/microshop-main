@@ -8,7 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 export class AuthService {
   constructor(
     @InjectRepository(AuthEntity)
-    private authRepository: Repository<AuthEntity>,
+    private readonly authRepository: Repository<AuthEntity>,
   ) {}
 
   register(registerDto) {
