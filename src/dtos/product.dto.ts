@@ -2,9 +2,6 @@ import { IsInt, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 
 export class CreateDto {
-  @IsInt()
-  @ApiProperty()
-  id: number
 
   @IsString()
   @ApiProperty()

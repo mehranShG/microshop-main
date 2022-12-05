@@ -25,7 +25,6 @@ export class ProductController {
   @Get(':id')
   @MessagePattern({ name: 'get_product' })
   getOneProduct(id: number) {
-    console.log(id)
     return this.productService.getOne(id)
   }
 

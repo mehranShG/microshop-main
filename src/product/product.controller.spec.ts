@@ -38,7 +38,7 @@ describe('ProductController', () => {
   describe('createProudct', () => {
     it('should create product', async () => {
       const product = new CreateDto()
-      expect(await controller.productCreate(product)).toEqual({
+      expect(await controller.addProduct(product)).toEqual({
         id: 1,
         title: 'tree.png',
       })
