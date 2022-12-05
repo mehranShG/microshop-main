@@ -1,4 +1,5 @@
 import { Model } from 'mongoose'
+import { from, Observable } from 'rxjs'
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { UpdateDto } from '../dtos/product.dto'
@@ -15,8 +16,9 @@ export class ProductService {
    * Get all Products
    * @returns product
    */
-  async getAll(): Promise<Product[]> {
-    return this.productModel.find().exec()
+  getAll(): Observable<Product[]> {
+    return from(this.productModel.find().exec()).pipe((x) => x)
+    //return this.productModel.find().exec()
   }
 
   /**
