@@ -1,3 +1,4 @@
+import { LoginDto } from 'src/dtos/login.dto'
 import { RegisterDto } from 'src/dtos/register.dto'
 import { AuthPass } from 'src/entities/auth-pass.entity'
 import { AuthEntity } from 'src/entities/auth.entity'
@@ -8,7 +9,7 @@ import { AuthService } from './auth.service'
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post()
+  @Post('register')
   Register(@Body() registerDto: RegisterDto) {
     const user = new AuthEntity()
     user.username = registerDto.username
@@ -17,5 +18,10 @@ export class AuthController {
     authPass.password = registerDto.password
     user.authPass = authPass
     return this.authService.register(user)
+  }
+
+  @Post('login')
+  login(@Body() login: LoginDto) {
+    return this.authService.login(login)
   }
 }
