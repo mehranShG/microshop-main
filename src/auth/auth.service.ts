@@ -28,4 +28,8 @@ export class AuthService {
     const validate = bcrypt.compare(loginDto.password, hashedPassword)
     return validate
   }
+
+  async findById(id: number): Promise<AuthEntity> {
+    return this.authRepository.findOne({ where: { id } })
+  }
 }
