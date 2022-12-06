@@ -1,4 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import {
+    Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn
+} from 'typeorm'
+import { AuthPass } from './auth-pass.entity'
 
 @Entity()
 export class AuthEntity {
@@ -9,9 +12,6 @@ export class AuthEntity {
   username: string
 
   @Column()
-  password: string
-
-  @Column()
   email: string
 
   @CreateDateColumn()
@@ -19,4 +19,7 @@ export class AuthEntity {
 
   @UpdateDateColumn()
   updated_time: Date
+
+  @OneToOne(() => AuthPass, (authPass) => authPass.id)
+  authPass: AuthPass
 }
