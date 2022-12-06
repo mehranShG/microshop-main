@@ -20,8 +20,8 @@ export class AuthPass {
 
   @BeforeInsert()
   @BeforeUpdate()
-  async hashPassword() {
+  async hashPassword(password: string) {
     const salt = await bcrypt.genSalt()
-    this.password = await bcrypt.hash(this.password, salt)
+    this.password = await bcrypt.hash(this.password || password, salt)
   }
 }

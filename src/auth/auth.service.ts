@@ -1,4 +1,4 @@
-import { from } from 'rxjs'
+import { from, Observable } from 'rxjs'
 import { AuthEntity } from 'src/entities/auth.entity'
 import { Repository } from 'typeorm'
 import { Injectable } from '@nestjs/common'
@@ -11,7 +11,15 @@ export class AuthService {
     private readonly authRepository: Repository<AuthEntity>,
   ) {}
 
-  register(registerDto) {
-    return from(this.authRepository.save(registerDto))
+  register(authEntity: AuthEntity): Observable<AuthEntity> {
+    return from(this.authRepository.save(authEntity))
+  }
+
+  login(loginDto) {
+    return from(
+      this.authRepository.findOne({
+        where: { username: loginDto, email: loginDto },
+      }),
+    )
   }
 }
