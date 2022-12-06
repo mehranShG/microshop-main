@@ -3,6 +3,7 @@ import { RegisterDto } from 'src/dtos/register.dto'
 import { AuthPass } from 'src/entities/auth-pass.entity'
 import { AuthEntity } from 'src/entities/auth.entity'
 import { Body, Controller, Post } from '@nestjs/common'
+import { MessagePattern } from '@nestjs/microservices'
 import { AuthService } from './auth.service'
 
 @Controller('auth')
@@ -10,6 +11,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
+  @MessagePattern({ name: 'auth_register' })
   Register(@Body() registerDto: RegisterDto) {
     const user = new AuthEntity()
     user.username = registerDto.username
@@ -21,6 +23,7 @@ export class AuthController {
   }
 
   @Post('login')
+  @MessagePattern({ name: 'auth_login' })
   login(@Body() login: LoginDto) {
     return this.authService.login(login)
   }
