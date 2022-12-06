@@ -1,5 +1,5 @@
 import {
-    Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn
+    Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn
 } from 'typeorm'
 import { AuthPass } from './auth-pass.entity'
 
@@ -20,6 +20,10 @@ export class AuthEntity {
   @UpdateDateColumn()
   updated_time: Date
 
-  @OneToOne(() => AuthPass, (authPass) => authPass.id)
+  @OneToOne(() => AuthPass, (authPass) => authPass.id, {
+    eager: true,
+    cascade: true,
+  })
+  @JoinColumn()
   authPass: AuthPass
 }
