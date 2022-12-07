@@ -18,6 +18,11 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
+  /**
+   * Resgister
+   * @param authEntity requires username,email and password
+   * @returns ResponseModel
+   */
   register(authEntity: AuthEntity): Observable<ResponseModel> {
     return from(this.authRepository.save(authEntity)).pipe(
       map((user) => {
@@ -37,6 +42,11 @@ export class AuthService {
     )
   }
 
+  /**
+   * Login
+   * @param loginDto requires email and password
+   * @returns ResponseModel
+   */
   async login(loginDto: LoginDto): Promise<ResponseModel | NotFoundException> {
     const findUser = await this.authRepository.findOne({
       where: { email: loginDto.email },
@@ -60,6 +70,12 @@ export class AuthService {
     }
   }
 
+  /**
+   * Find user
+   * used by jwt.strategy
+   * @param id
+   * @returns
+   */
   async findById(id: number): Promise<AuthEntity> {
     return this.authRepository.findOne({ where: { id: 1 } })
   }
