@@ -2,6 +2,7 @@ import * as bcrypt from 'bcrypt'
 import { catchError, from, map, Observable } from 'rxjs'
 import { LoginDto } from 'src/dtos/login.dto'
 import { AuthEntity } from 'src/entities/auth.entity'
+import { ResponseModel } from 'src/interface/response.model'
 import { Repository } from 'typeorm'
 import {
     ConflictException, Injectable, NotFoundException, UnauthorizedException
@@ -17,13 +18,17 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  register(authEntity: AuthEntity): Observable<Object> {
+  register(authEntity: AuthEntity): Observable<ResponseModel> {
     return from(this.authRepository.save(authEntity)).pipe(
       map((user) => {
         return {
-          username: user.username,
-          email: user.email,
-          token: this.jwtService.sign({ id: user.id, expiresIn: '1h' }),
+          success: true,
+          result: {
+            username: user.username,
+            email: user.email,
+            token: this.jwtService.sign({ id: user.id, expiresIn: '1h' }),
+          },
+          code: 201,
         }
       }),
       catchError((err) => {
@@ -32,7 +37,7 @@ export class AuthService {
     )
   }
 
-  async login(loginDto: LoginDto): Promise<Object | NotFoundException> {
+  async login(loginDto: LoginDto): Promise<ResponseModel | NotFoundException> {
     const findUser = await this.authRepository.findOne({
       where: { email: loginDto.email },
     })
@@ -48,7 +53,11 @@ export class AuthService {
       id: findUser.id,
       expiresIn: '1h',
     })
-    return { id: findUser.id, token: user_token }
+    return {
+      success: true,
+      result: { id: findUser.id, token: user_token },
+      code: 200,
+    }
   }
 
   async findById(id: number): Promise<AuthEntity> {

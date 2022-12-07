@@ -7,11 +7,4 @@ export class ResponseModel {
     this.result = result
     this.code = code
   }
-  toObject() {
-    return {
-      success: this.success,
-      result: this.result,
-      code: this.code,
-    }
-  }
 }
