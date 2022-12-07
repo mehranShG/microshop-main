@@ -12,7 +12,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: '1234',
     })
   }
-  async validate(payload: any) {
+  async validate(payload: any): Promise<Object> {
     const user = await this.authService.findById(payload.id)
     if (!user) {
       throw new UnauthorizedException()
