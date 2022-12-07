@@ -42,7 +42,7 @@ export class AuthService {
     const hashedPassword = findUser.authPass.password
     const validate = await bcrypt.compare(loginDto.password, hashedPassword)
     if (!validate) {
-      throw new UnauthorizedException()
+      return new UnauthorizedException()
     }
     const user_token = await this.jwtService.signAsync({
       id: findUser.id,
@@ -52,6 +52,6 @@ export class AuthService {
   }
 
   async findById(id: number): Promise<AuthEntity> {
-    return this.authRepository.findOne({ where: { id } })
+    return this.authRepository.findOne({ where: { id: 1 } })
   }
 }

@@ -31,6 +31,7 @@ export class AuthController {
   @Get()
   @MessagePattern({ name: 'find_by_id' })
   getUserByID(id: number) {
+    console.log(id)
     return this.authService.findById(id)
   }
 }
