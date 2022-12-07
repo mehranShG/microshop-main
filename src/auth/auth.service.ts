@@ -3,7 +3,9 @@ import { catchError, from, map, Observable } from 'rxjs'
 import { LoginDto } from 'src/dtos/login.dto'
 import { AuthEntity } from 'src/entities/auth.entity'
 import { Repository } from 'typeorm'
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common'
+import {
+    ConflictException, Injectable, NotFoundException, UnauthorizedException
+} from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { InjectRepository } from '@nestjs/typeorm'
 
@@ -30,7 +32,7 @@ export class AuthService {
     )
   }
 
-  async login(loginDto: LoginDto): Promise<boolean | NotFoundException> {
+  async login(loginDto: LoginDto): Promise<Object | NotFoundException> {
     const findUser = await this.authRepository.findOne({
       where: { email: loginDto.email },
     })
@@ -38,8 +40,15 @@ export class AuthService {
       return new NotFoundException()
     }
     const hashedPassword = findUser.authPass.password
-    const validate = bcrypt.compare(loginDto.password, hashedPassword)
-    return validate
+    const validate = await bcrypt.compare(loginDto.password, hashedPassword)
+    if (!validate) {
+      throw new UnauthorizedException()
+    }
+    const user_token = await this.jwtService.signAsync({
+      id: findUser.id,
+      expiresIn: '1h',
+    })
+    return { id: findUser.id, token: user_token }
   }
 
   async findById(id: number): Promise<AuthEntity> {
