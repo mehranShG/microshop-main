@@ -1,9 +1,10 @@
 import * as bcrypt from 'bcrypt'
-import { from, Observable } from 'rxjs'
+import { catchError, from, map, Observable } from 'rxjs'
 import { LoginDto } from 'src/dtos/login.dto'
 import { AuthEntity } from 'src/entities/auth.entity'
 import { Repository } from 'typeorm'
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
 import { InjectRepository } from '@nestjs/typeorm'
 
 @Injectable()
@@ -11,10 +12,22 @@ export class AuthService {
   constructor(
     @InjectRepository(AuthEntity)
     private readonly authRepository: Repository<AuthEntity>,
+    private readonly jwtService: JwtService,
   ) {}
 
-  register(authEntity: AuthEntity): Observable<AuthEntity> {
-    return from(this.authRepository.save(authEntity))
+  register(authEntity: AuthEntity): Observable<Object> {
+    return from(this.authRepository.save(authEntity)).pipe(
+      map((user) => {
+        return {
+          username: user.username,
+          email: user.email,
+          token: this.jwtService.sign({ id: user.id, expiresIn: '1h' }),
+        }
+      }),
+      catchError((err) => {
+        throw new ConflictException()
+      }),
+    )
   }
 
   async login(loginDto: LoginDto): Promise<boolean | NotFoundException> {
