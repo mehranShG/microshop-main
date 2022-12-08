@@ -4,8 +4,10 @@ import { AuthPass } from 'src/entities/auth-pass.entity'
 import { AuthEntity } from 'src/entities/auth.entity'
 import { Body, Controller, Get, Post } from '@nestjs/common'
 import { MessagePattern } from '@nestjs/microservices'
+import { ApiTags } from '@nestjs/swagger'
 import { AuthService } from './auth.service'
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

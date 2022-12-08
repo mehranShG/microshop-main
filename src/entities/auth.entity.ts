@@ -11,7 +11,7 @@ export class AuthEntity {
   @Column()
   username: string
 
-  @Column()
+  @Column({ unique: true })
   email: string
 
   @CreateDateColumn()
