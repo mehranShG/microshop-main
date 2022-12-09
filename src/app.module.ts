@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common'
+import { CacheModule, Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose'
 import { TypeOrmModule } from '@nestjs/typeorm'
@@ -10,6 +10,8 @@ import { ProductModule } from './product/product.module'
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    CacheModule.register({ isGlobal: true }),
+    CacheModule.register({ isGlobal: true }),
     MongooseModule.forRoot(process.env.DB_MONGO),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
