@@ -1,6 +1,7 @@
+import { Cache } from 'cache-manager'
 import { Model } from 'mongoose'
 import { EMPTY, from, Observable } from 'rxjs'
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { UpdateDto } from '../dtos/product.dto'
 import { Product, ProductDocument } from '../schemas/product.model'
@@ -8,6 +9,7 @@ import { Product, ProductDocument } from '../schemas/product.model'
 @Injectable()
 export class ProductService {
   constructor(
+    @Inject('CACHE_MANAGER') private readonly cacheManager: Cache,
     @InjectModel(Product.name)
     private readonly productModel: Model<ProductDocument>,
   ) {}
@@ -17,6 +19,9 @@ export class ProductService {
    * @returns product
    */
   getAll(): Observable<Product[]> {
+    this.cacheManager.set('cache-item', 32)
+    const cachedItem = this.cacheManager.get('cache-item')
+    console.log(cachedItem)
     return from(this.productModel.find().exec())
     //return this.productModel.find().exec()
   }

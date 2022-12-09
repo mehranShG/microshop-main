@@ -10,7 +10,7 @@ export class ProductController {
   constructor(private productService: ProductService) {}
 
   @Get()
-  getAll() {
+  async getAll() {
     return this.productService.getAll()
   }
 

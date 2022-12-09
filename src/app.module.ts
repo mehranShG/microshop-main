@@ -11,7 +11,6 @@ import { ProductModule } from './product/product.module'
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     CacheModule.register({ isGlobal: true }),
-    CacheModule.register({ isGlobal: true }),
     MongooseModule.forRoot(process.env.DB_MONGO),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
