@@ -1,5 +1,6 @@
-import { CacheModule, Module } from '@nestjs/common'
+import { CacheInterceptor, CacheModule, Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
+import { APP_INTERCEPTOR } from '@nestjs/core'
 import { MongooseModule } from '@nestjs/mongoose'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AuthModule } from './auth/auth.module'
@@ -29,5 +30,6 @@ import { ProductModule } from './product/product.module'
     ProductModule,
     AuthModule,
   ],
+  providers: [{ provide: APP_INTERCEPTOR, useClass: CacheInterceptor }],
 })
 export class AppModule {}
