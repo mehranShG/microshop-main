@@ -18,11 +18,16 @@ export class ProductService {
    * Get all Products
    * @returns product
    */
-  getAll(): Observable<Product[]> {
-    this.cacheManager.set('cache-item', 32)
-    const cachedItem = this.cacheManager.get('cache-item')
+  async getAll(): Promise<Product[] | {}> {
+    // this.cacheManager.set('cache_getAll', 32)
+    const cachedItem = await this.cacheManager.get('cache-getAll')
     console.log(cachedItem)
-    return from(this.productModel.find().exec())
+    if (cachedItem == undefined) {
+      const result = await this.productModel.find().exec()
+      await this.cacheManager.set('cache-getAll', result, 50)
+      return result
+    }
+    return cachedItem
     //return this.productModel.find().exec()
   }
 

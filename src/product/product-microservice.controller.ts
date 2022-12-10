@@ -1,13 +1,25 @@
 import { Product } from 'src/schemas/product.model'
-import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common'
+import {
+  Body,
+  CacheInterceptor,
+  CacheKey,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Put,
+  UseInterceptors,
+} from '@nestjs/common'
 import { MessagePattern } from '@nestjs/microservices'
 import { CreateDto, UpdateDto } from '../dtos/product.dto'
 import { ProductService } from './product.service'
 
 @Controller('microservice/product')
+@UseInterceptors(CacheInterceptor)
 export class ProductMicroController {
   constructor(private productService: ProductService) {}
 
+  @CacheKey('cache_getAll')
   @Get()
   @MessagePattern({ name: 'all_product' })
   getAll() {
