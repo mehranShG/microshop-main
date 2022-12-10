@@ -3,7 +3,11 @@ import { RegisterDto } from '../dtos/register.dto'
 import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
 
-const fakeService = {}
+const fakeService = {
+  register: jest
+    .fn()
+    .mockResolvedValue({ success: true, result: {}, code: 201 }),
+}
 
 describe('AuthController', () => {
   let controller: AuthController
@@ -25,12 +29,16 @@ describe('AuthController', () => {
   })
 
   describe('Register', () => {
-    it('should register user', () => {
+    it('should register user', async () => {
       const register = new RegisterDto()
       register.email = 'test@a.com'
       register.password = 'testingA'
       register.username = 'testing'
-      expect(controller.Register(register)).toEqual(1)
+      expect(await controller.Register(register)).toEqual({
+        code: 201,
+        result: {},
+        success: true,
+      })
     })
   })
 })
