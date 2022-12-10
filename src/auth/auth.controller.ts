@@ -1,10 +1,10 @@
-import { LoginDto } from 'src/dtos/login.dto'
-import { RegisterDto } from 'src/dtos/register.dto'
-import { AuthPass } from 'src/entities/auth-pass.entity'
-import { AuthEntity } from 'src/entities/auth.entity'
 import { Body, Controller, Get, Post } from '@nestjs/common'
 import { MessagePattern } from '@nestjs/microservices'
 import { ApiTags } from '@nestjs/swagger'
+import { LoginDto } from '../dtos/login.dto'
+import { RegisterDto } from '../dtos/register.dto'
+import { AuthPass } from '../entities/auth-pass.entity'
+import { AuthEntity } from '../entities/auth.entity'
 import { AuthService } from './auth.service'
 
 @ApiTags('Auth')
