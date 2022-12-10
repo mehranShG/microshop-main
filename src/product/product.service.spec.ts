@@ -5,9 +5,8 @@ import { ProductService } from './product.service'
 
 class MockProductModel {
   constructor(private data) {}
-  findOne = jest.fn((title) => {})
+  findOne = jest.fn(() => {})
   save = jest.fn().mockResolvedValue(this.data)
-
   static findOne = jest.fn()
 }
 

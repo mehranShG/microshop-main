@@ -26,7 +26,6 @@ export class ProductController {
     createDto.image = product.image
     createDto.likes = product.likes
     const result = await this.productService.addProduct(createDto)
-
     return result
   }
 

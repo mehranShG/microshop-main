@@ -8,7 +8,7 @@ import { AppModule } from './app.module'
 config()
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
-  // Starting RabbitMQ microservice
+  // Starting Redis microservice
   const microservice =
     await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
       transport: Transport.REDIS,

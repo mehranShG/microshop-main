@@ -1,4 +1,3 @@
-import { validate } from 'class-validator'
 import { config } from 'dotenv'
 import { ExtractJwt, Strategy } from 'passport-jwt'
 import { Injectable, UnauthorizedException } from '@nestjs/common'
