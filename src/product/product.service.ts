@@ -1,6 +1,5 @@
 import { Cache } from 'cache-manager'
 import { Model } from 'mongoose'
-import { EMPTY, from, Observable } from 'rxjs'
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { UpdateDto } from '../dtos/product.dto'
@@ -21,14 +20,12 @@ export class ProductService {
   async getAll(): Promise<Product[] | {}> {
     // this.cacheManager.set('cache_getAll', 32)
     const cachedItem = await this.cacheManager.get('cache-getAll')
-    console.log(cachedItem)
     if (cachedItem == undefined) {
       const result = await this.productModel.find().exec()
       await this.cacheManager.set('cache-getAll', result, 50)
       return result
     }
     return cachedItem
-    //return this.productModel.find().exec()
   }
 
   /**
@@ -36,12 +33,14 @@ export class ProductService {
    * @param id
    * @returns
    */
-  getOne(id: number): Observable<Product> {
-    const foundProduct = from(this.productModel.findOne({ id }))
-    if (foundProduct) {
-      return from(foundProduct)
+  async getOne(id: number): Promise<Product | {}> {
+    const cachedItem = await this.cacheManager.get('cache-getAll')
+    if (cachedItem == undefined) {
+      const result = await this.productModel.findOne({ id })
+      await this.cacheManager.set('cache-getAll', result, 50)
+      return result
     }
-    return EMPTY
+    return cachedItem
   }
 
   /**
