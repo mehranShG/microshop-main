@@ -76,8 +76,14 @@ export class AuthService {
    * @param id
    * @returns
    */
-  async findById(id: number): Promise<AuthEntity> {
-    return this.authRepository.findOne({ where: { id: 1 } })
+  async findById(id: number): Promise<ResponseModel> {
+    const foundUser = await this.authRepository.findOne({ where: { id: 1 } })
+    console.log(foundUser)
+    return {
+      success: true,
+      result: foundUser,
+      code: 200,
+    }
   }
 
   async getAllUsers(): Promise<AuthEntity[]> {
