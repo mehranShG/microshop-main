@@ -26,6 +26,9 @@ export class AuthEntity {
   @Column({ nullable: true })
   address: string
 
+  @Column({ nullable: true })
+  profile_image: string
+
   @CreateDateColumn()
   created_time: Date
 
