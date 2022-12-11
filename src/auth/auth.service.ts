@@ -77,8 +77,7 @@ export class AuthService {
    * @returns
    */
   async findById(id: number): Promise<ResponseModel> {
-    const foundUser = await this.authRepository.findOne({ where: { id: 1 } })
-    console.log(foundUser)
+    const foundUser = await this.authRepository.findOne({ where: { id: id } })
     return {
       success: true,
       result: foundUser,
