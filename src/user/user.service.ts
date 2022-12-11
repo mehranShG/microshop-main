@@ -1,3 +1,4 @@
+import { UpdateProfileDto } from 'src/dtos/update-profile.dto'
 import { AuthEntity } from 'src/entities/auth.entity'
 import { ResponseModel } from 'src/interface/response.model'
 import { Repository } from 'typeorm'
@@ -8,11 +9,11 @@ import { InjectRepository } from '@nestjs/typeorm'
 export class UserService {
   constructor(
     @InjectRepository(AuthEntity)
-    private readonly AuthRepository: Repository<AuthEntity>,
+    private readonly authRepository: Repository<AuthEntity>,
   ) {}
 
   async getUserProfile(id: number): Promise<ResponseModel> {
-    const findUser = await this.AuthRepository.findOne({ where: { id: id } })
+    const findUser = await this.authRepository.findOne({ where: { id: id } })
     if (!findUser) {
       throw new NotFoundException()
     }
@@ -31,7 +32,20 @@ export class UserService {
     }
   }
 
-  async updateProfile(updateProfileDto) {
-    const finduser = await this.AuthRepository.findOne({ where: { id: 1 } })
+  async updateProfile(updateProfileDto: UpdateProfileDto) {
+    const finduser = await this.authRepository.findOne({ where: { id: 1 } })
+    if (!finduser) {
+      throw new NotFoundException()
+    }
+    finduser.first_name = updateProfileDto.first_name
+    finduser.last_name = updateProfileDto.last_name
+    finduser.address = updateProfileDto.address
+    finduser.phone_number = updateProfileDto.phone_number
+    const updateProfile = await this.authRepository.save(finduser)
+    return {
+      succes: true,
+      result: updateProfile,
+      code: 200,
+    }
   }
 }
