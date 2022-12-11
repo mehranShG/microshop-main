@@ -14,10 +14,11 @@ export class UserController {
     return this.userService.getUserProfile(id)
   }
 
-  @Put()
+  @Put('profile:id')
   async updateProfile(
+    @Param('id') id: number,
     @Body() updateProfileDto: UpdateProfileDto,
   ): Promise<ResponseModel> {
-    return this.userService.updateProfile(updateProfileDto)
+    return this.userService.updateProfile(id, updateProfileDto)
   }
 }

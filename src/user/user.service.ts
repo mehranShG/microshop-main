@@ -33,9 +33,10 @@ export class UserService {
   }
 
   async updateProfile(
+    id: number,
     updateProfileDto: UpdateProfileDto,
   ): Promise<ResponseModel> {
-    const finduser = await this.authRepository.findOne({ where: { id: 1 } })
+    const finduser = await this.authRepository.findOne({ where: { id: id } })
     if (!finduser) {
       throw new NotFoundException()
     }
