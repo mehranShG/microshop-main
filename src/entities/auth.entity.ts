@@ -14,6 +14,18 @@ export class AuthEntity {
   @Column({ unique: true })
   email: string
 
+  @Column({ nullable: true })
+  first_name: string
+
+  @Column({ nullable: true })
+  last_name: string
+
+  @Column({ nullable: true })
+  phone_number: string
+
+  @Column({ nullable: true })
+  address: string
+
   @CreateDateColumn()
   created_time: Date
 

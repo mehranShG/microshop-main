@@ -33,6 +33,6 @@ export class AuthController {
   @Get()
   @MessagePattern({ name: 'find_by_id' })
   getUserByID(id: number) {
-    return this.authService.findById(id)
+    return this.authService.findById(3)
   }
 }
