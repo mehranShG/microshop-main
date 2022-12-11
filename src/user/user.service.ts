@@ -32,7 +32,9 @@ export class UserService {
     }
   }
 
-  async updateProfile(updateProfileDto: UpdateProfileDto) {
+  async updateProfile(
+    updateProfileDto: UpdateProfileDto,
+  ): Promise<ResponseModel> {
     const finduser = await this.authRepository.findOne({ where: { id: 1 } })
     if (!finduser) {
       throw new NotFoundException()
@@ -43,7 +45,7 @@ export class UserService {
     finduser.phone_number = updateProfileDto.phone_number
     const updateProfile = await this.authRepository.save(finduser)
     return {
-      succes: true,
+      success: true,
       result: updateProfile,
       code: 200,
     }
