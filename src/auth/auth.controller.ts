@@ -33,6 +33,11 @@ export class AuthController {
   @Get()
   @MessagePattern({ name: 'find_by_id' })
   getUserByID(id: number) {
-    return this.authService.findById(3)
+    return this.authService.findById(id)
+  }
+
+  @Get('users')
+  async getAllUsers(): Promise<AuthEntity[]> {
+    return this.authService.getAllUsers()
   }
 }

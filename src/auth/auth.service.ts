@@ -79,4 +79,8 @@ export class AuthService {
   async findById(id: number): Promise<AuthEntity> {
     return this.authRepository.findOne({ where: { id: 1 } })
   }
+
+  async getAllUsers(): Promise<AuthEntity[]> {
+    return this.authRepository.find()
+  }
 }
