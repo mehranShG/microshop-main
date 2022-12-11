@@ -30,4 +30,8 @@ export class UserService {
       code: 200,
     }
   }
+
+  async updateProfile(updateProfileDto) {
+    const finduser = await this.AuthRepository.findOne({ where: { id: 1 } })
+  }
 }
