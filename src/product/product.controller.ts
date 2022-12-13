@@ -10,7 +10,7 @@ export class ProductController {
   constructor(private productService: ProductService) {}
 
   @Get()
-  getAll() {
+  async getAll() {
     return this.productService.getAll()
   }
 
@@ -26,7 +26,6 @@ export class ProductController {
     createDto.image = product.image
     createDto.likes = product.likes
     const result = await this.productService.addProduct(createDto)
-
     return result
   }
 

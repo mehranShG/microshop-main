@@ -1,15 +1,17 @@
-import { validate } from 'class-validator'
+import { config } from 'dotenv'
 import { ExtractJwt, Strategy } from 'passport-jwt'
 import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
 import { AuthService } from './auth.service'
+
+config()
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly authService: AuthService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: '1234',
+      secretOrKey: process.env.JWT_SECRET,
     })
   }
   async validate(payload: any): Promise<Object> {
@@ -17,6 +19,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UnauthorizedException()
     }
-    return { user: user.id, username: user.username }
+    return { user: user.result.id, username: user.result.username }
   }
 }

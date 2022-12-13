@@ -1,10 +1,12 @@
-import { LoginDto } from 'src/dtos/login.dto'
-import { RegisterDto } from 'src/dtos/register.dto'
-import { AuthPass } from 'src/entities/auth-pass.entity'
-import { AuthEntity } from 'src/entities/auth.entity'
-import { Body, Controller, Get, Post } from '@nestjs/common'
+import { Observable } from 'rxjs'
+import { ResponseModel } from 'src/interface/response.model'
+import { Body, Controller, Get, NotFoundException, Post } from '@nestjs/common'
 import { MessagePattern } from '@nestjs/microservices'
 import { ApiTags } from '@nestjs/swagger'
+import { LoginDto } from '../dtos/login.dto'
+import { RegisterDto } from '../dtos/register.dto'
+import { AuthPass } from '../entities/auth-pass.entity'
+import { AuthEntity } from '../entities/auth.entity'
 import { AuthService } from './auth.service'
 
 @ApiTags('Auth')
@@ -14,7 +16,7 @@ export class AuthController {
 
   @Post('register')
   @MessagePattern({ name: 'auth_register' })
-  Register(@Body() registerDto: RegisterDto) {
+  Register(@Body() registerDto: RegisterDto): Observable<ResponseModel> {
     const user = new AuthEntity()
     user.username = registerDto.username
     user.email = registerDto.email
@@ -26,13 +28,18 @@ export class AuthController {
 
   @Post('login')
   @MessagePattern({ name: 'auth_login' })
-  login(@Body() login: LoginDto) {
+  login(@Body() login: LoginDto): Promise<ResponseModel | NotFoundException> {
     return this.authService.login(login)
   }
 
   @Get()
   @MessagePattern({ name: 'find_by_id' })
-  getUserByID(id: number) {
+  getUserByID(id: number): Promise<ResponseModel> {
     return this.authService.findById(id)
+  }
+
+  @Get('users')
+  async getAllUsers(): Promise<AuthEntity[]> {
+    return this.authService.getAllUsers()
   }
 }

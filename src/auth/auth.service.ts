@@ -1,14 +1,14 @@
 import * as bcrypt from 'bcrypt'
 import { catchError, from, map, Observable } from 'rxjs'
-import { LoginDto } from 'src/dtos/login.dto'
-import { AuthEntity } from 'src/entities/auth.entity'
-import { ResponseModel } from 'src/interface/response.model'
 import { Repository } from 'typeorm'
 import {
     ConflictException, Injectable, NotFoundException, UnauthorizedException
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { InjectRepository } from '@nestjs/typeorm'
+import { LoginDto } from '../dtos/login.dto'
+import { AuthEntity } from '../entities/auth.entity'
+import { ResponseModel } from '../interface/response.model'
 
 @Injectable()
 export class AuthService {
@@ -76,7 +76,16 @@ export class AuthService {
    * @param id
    * @returns
    */
-  async findById(id: number): Promise<AuthEntity> {
-    return this.authRepository.findOne({ where: { id: 1 } })
+  async findById(id: number): Promise<ResponseModel> {
+    const foundUser = await this.authRepository.findOne({ where: { id: id } })
+    return {
+      success: true,
+      result: foundUser,
+      code: 200,
+    }
+  }
+
+  async getAllUsers(): Promise<AuthEntity[]> {
+    return this.authRepository.find()
   }
 }

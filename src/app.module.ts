@@ -1,15 +1,18 @@
-import { Module } from '@nestjs/common'
+import { CacheInterceptor, CacheModule, Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
+import { APP_INTERCEPTOR } from '@nestjs/core'
 import { MongooseModule } from '@nestjs/mongoose'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AuthModule } from './auth/auth.module'
 import { AuthPass } from './entities/auth-pass.entity'
 import { AuthEntity } from './entities/auth.entity'
 import { ProductModule } from './product/product.module'
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    CacheModule.register({ isGlobal: true }),
     MongooseModule.forRoot(process.env.DB_MONGO),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -27,6 +30,8 @@ import { ProductModule } from './product/product.module'
     }),
     ProductModule,
     AuthModule,
+    UserModule,
   ],
+  providers: [{ provide: APP_INTERCEPTOR, useClass: CacheInterceptor }],
 })
 export class AppModule {}
