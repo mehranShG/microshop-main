@@ -2,7 +2,7 @@ import { UpdateProfileDto } from 'src/dtos/update-profile.dto'
 import { AuthEntity } from 'src/entities/auth.entity'
 import { ResponseModel } from 'src/interface/response.model'
 import { Repository } from 'typeorm'
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
 @Injectable()
@@ -15,7 +15,11 @@ export class UserService {
   async getUserProfile(id: number): Promise<ResponseModel> {
     const findUser = await this.authRepository.findOne({ where: { id: id } })
     if (!findUser) {
-      throw new NotFoundException()
+      return {
+        success: true,
+        result: 'Not found!',
+        code: 404,
+      }
     }
     const profile = {
       id: findUser.id,
@@ -38,7 +42,11 @@ export class UserService {
   ): Promise<ResponseModel> {
     const finduser = await this.authRepository.findOne({ where: { id: id } })
     if (!finduser) {
-      throw new NotFoundException()
+      return {
+        success: true,
+        result: 'Not found!',
+        code: 404,
+      }
     }
     finduser.first_name = updateProfileDto.first_name
     finduser.last_name = updateProfileDto.last_name
