@@ -14,6 +14,14 @@ const fakeService = {
   findById: jest
     .fn()
     .mockResolvedValue({ success: true, result: 'user', code: 200 }),
+
+  getAllUsers: jest
+    .fn()
+    .mockResolvedValue({
+      success: true,
+      result: ['user1', 'user2'],
+      code: 200,
+    }),
 }
 
 describe('AuthController', () => {
@@ -67,6 +75,16 @@ describe('AuthController', () => {
       expect(await controller.getUserByID(1)).toEqual({
         success: true,
         result: 'user',
+        code: 200,
+      })
+    })
+  })
+
+  describe('getAllUsers', () => {
+    it('should get all users', async () => {
+      expect(await controller.getAllUsers()).toEqual({
+        success: true,
+        result: ['user1', 'user2'],
         code: 200,
       })
     })
