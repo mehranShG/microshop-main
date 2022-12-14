@@ -6,10 +6,10 @@ import { UserService } from './user.service'
 const fakeUserService = {
   updateProfile: jest
     .fn()
-    .mockResolvedValue({ succuss: true, result: 'updated' }),
+    .mockResolvedValue({ success: true, result: 'updated' }),
   getUserProfile: jest
     .fn()
-    .mockResolvedValue({ succuss: true, result: 'profile', code: 200 }),
+    .mockResolvedValue({ success: true, result: 'profile', code: 200 }),
 }
 
 describe('UserController', () => {
@@ -34,7 +34,7 @@ describe('UserController', () => {
   describe('getUserProfile', () => {
     it('should get user profile', async () => {
       expect(await controller.getUserProfile(1)).toEqual({
-        succuss: true,
+        success: true,
         result: 'profile',
         code: 200,
       })
@@ -49,7 +49,7 @@ describe('UserController', () => {
       updateProfile.address = 'test street'
       updateProfile.phone_number = '09111111111'
       expect(await controller.updateProfile(1, updateProfile)).toEqual({
-        succuss: true,
+        success: true,
         result: 'updated',
       })
     })
