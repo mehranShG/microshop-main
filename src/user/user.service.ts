@@ -1,9 +1,9 @@
-import { UpdateProfileDto } from 'src/dtos/update-profile.dto'
-import { AuthEntity } from 'src/entities/auth.entity'
-import { ResponseModel } from 'src/interface/response.model'
 import { Repository } from 'typeorm'
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
+import { UpdateProfileDto } from '../dtos/update-profile.dto'
+import { AuthEntity } from '../entities/auth.entity'
+import { ResponseModel } from '../interface/response.model'
 
 @Injectable()
 export class UserService {
