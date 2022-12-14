@@ -7,6 +7,9 @@ const fakeUserService = {
   updateProfile: jest
     .fn()
     .mockResolvedValue({ succuss: true, result: 'updated' }),
+  getUserProfile: jest
+    .fn()
+    .mockResolvedValue({ succuss: true, result: 'profile', code: 200 }),
 }
 
 describe('UserController', () => {
@@ -26,6 +29,16 @@ describe('UserController', () => {
 
   it('should be defined', () => {
     expect(controller).toBeDefined()
+  })
+
+  describe('getUserProfile', () => {
+    it('should get user profile', async () => {
+      expect(await controller.getUserProfile(1)).toEqual({
+        succuss: true,
+        result: 'profile',
+        code: 200,
+      })
+    })
   })
 
   describe('updateProfile', () => {
