@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing'
+import { LoginDto } from '../dtos/login.dto'
 import { RegisterDto } from '../dtos/register.dto'
 import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
@@ -7,6 +8,7 @@ const fakeService = {
   register: jest
     .fn()
     .mockResolvedValue({ success: true, result: {}, code: 201 }),
+  login: jest.fn().mockResolvedValue({ success: true, result: {}, code: 200 }),
 }
 
 describe('AuthController', () => {
@@ -36,6 +38,20 @@ describe('AuthController', () => {
       register.username = 'testing'
       expect(await controller.Register(register)).toEqual({
         code: 201,
+        result: {},
+        success: true,
+      })
+    })
+  })
+
+  describe('Login', () => {
+    it('should login', async () => {
+      const login = new LoginDto()
+      login.email = 'test@a.com'
+      login.password = 'testingA'
+
+      expect(await controller.login(login)).toEqual({
+        code: 200,
         result: {},
         success: true,
       })
