@@ -17,6 +17,7 @@ describe('ProductService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         ProductService,
+        { provide: 'CACHE_MANAGER', useValue: {} },
         { provide: getModelToken(Product.name), useValue: MockProductModel },
       ],
     }).compile()

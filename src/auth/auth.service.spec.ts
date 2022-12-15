@@ -13,14 +13,17 @@ const fakeAuthEntity = {
       password: '$2a$10$B7hRu976Yuy1M76Qt2aH7O9nVZRM3PqlaV4t.M9ndAeGn9l3./jzi',
     },
   }),
+
   save: jest
     .fn()
     .mockResolvedValue({ email: 'test@a.com', username: 'test@a.com', id: 1 }),
+
   find: jest.fn().mockResolvedValue(['user1', 'user2']),
 }
 
 const fakeJwt = {
   signAsync: jest.fn().mockResolvedValue('token'),
+
   sign: jest.fn().mockReturnValue('token'),
 }
 
