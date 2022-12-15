@@ -13,10 +13,14 @@ const fakeAuthEntity = {
       password: '$2a$10$B7hRu976Yuy1M76Qt2aH7O9nVZRM3PqlaV4t.M9ndAeGn9l3./jzi',
     },
   }),
+  save: jest
+    .fn()
+    .mockResolvedValue({ email: 'test@a.com', username: 'test@a.com', id: 1 }),
 }
 
 const fakeJwt = {
   signAsync: jest.fn().mockResolvedValue('token'),
+  sign: jest.fn().mockReturnValue('token'),
 }
 
 describe('AuthService', () => {
@@ -48,6 +52,25 @@ describe('AuthService', () => {
         result: { id: 5, token: 'token' },
         success: true,
       })
+    })
+  })
+
+  // RxJS testing >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  describe('Register', () => {
+    it('should register user', async () => {
+      const registerDto = new AuthEntity()
+      const register = service.register(registerDto)
+      register.subscribe((result) =>
+        expect(result).toEqual({
+          code: 201,
+          result: {
+            email: 'test@a.com',
+            token: 'token',
+            username: 'test@a.com',
+          },
+          success: true,
+        }),
+      )
     })
   })
 })

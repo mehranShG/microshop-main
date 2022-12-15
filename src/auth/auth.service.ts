@@ -37,6 +37,7 @@ export class AuthService {
         }
       }),
       catchError((err) => {
+        console.log(err.message)
         throw new ConflictException()
       }),
     )
