@@ -42,19 +42,6 @@ describe('AuthService', () => {
     expect(service).toBeDefined()
   })
 
-  describe('Login', () => {
-    it('should login', async () => {
-      const loginDto = new LoginDto()
-      loginDto.email = 'test@a.com'
-      loginDto.password = 'testingA'
-      expect(await service.login(loginDto)).toEqual({
-        code: 200,
-        result: { id: 5, token: 'token' },
-        success: true,
-      })
-    })
-  })
-
   // RxJS testing >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   describe('Register', () => {
     it('should register user', async () => {
@@ -71,6 +58,19 @@ describe('AuthService', () => {
           success: true,
         }),
       )
+    })
+  })
+
+  describe('Login', () => {
+    it('should login', async () => {
+      const loginDto = new LoginDto()
+      loginDto.email = 'test@a.com'
+      loginDto.password = 'testingA'
+      expect(await service.login(loginDto)).toEqual({
+        code: 200,
+        result: { id: 5, token: 'token' },
+        success: true,
+      })
     })
   })
 })
