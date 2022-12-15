@@ -73,4 +73,21 @@ describe('AuthService', () => {
       })
     })
   })
+
+  describe('findById', () => {
+    it('should find a user', async () => {
+      expect(await service.findById(1)).toEqual({
+        code: 200,
+        result: {
+          authPass: {
+            password:
+              '$2a$10$B7hRu976Yuy1M76Qt2aH7O9nVZRM3PqlaV4t.M9ndAeGn9l3./jzi',
+          },
+          email: 'test@a.com',
+          id: 5,
+        },
+        success: true,
+      })
+    })
+  })
 })
