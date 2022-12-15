@@ -16,6 +16,7 @@ const fakeAuthEntity = {
   save: jest
     .fn()
     .mockResolvedValue({ email: 'test@a.com', username: 'test@a.com', id: 1 }),
+  find: jest.fn().mockResolvedValue(['user1', 'user2']),
 }
 
 const fakeJwt = {
@@ -88,6 +89,12 @@ describe('AuthService', () => {
         },
         success: true,
       })
+    })
+  })
+
+  describe('getAllUsers', () => {
+    it('should get all user', async () => {
+      expect(await service.getAllUsers()).toEqual(['user1', 'user2'])
     })
   })
 })
