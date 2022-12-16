@@ -39,6 +39,7 @@ export class AuthController {
   }
 
   @Get('users')
+  @MessagePattern({ name: 'get_all_users' })
   async getAllUsers(): Promise<AuthEntity[]> {
     return this.authService.getAllUsers()
   }

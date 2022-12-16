@@ -1,7 +1,7 @@
-import { UpdateProfileDto } from 'src/dtos/update-profile.dto'
-import { ResponseModel } from 'src/interface/response.model'
 import { Body, Controller, Get, Param, Put } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
+import { UpdateProfileDto } from '../dtos/update-profile.dto'
+import { ResponseModel } from '../interface/response.model'
 import { UserService } from './user.service'
 
 @ApiTags('User')

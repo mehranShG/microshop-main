@@ -1,7 +1,7 @@
-import { Product } from 'src/schemas/product.model'
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 import { CreateDto, UpdateDto } from '../dtos/product.dto'
+import { Product } from '../schemas/product.model'
 import { ProductService } from './product.service'
 
 @ApiTags('Products')

@@ -1,14 +1,6 @@
 import { Product } from 'src/schemas/product.model'
 import {
-  Body,
-  CacheInterceptor,
-  CacheKey,
-  Controller,
-  Delete,
-  Get,
-  Post,
-  Put,
-  UseInterceptors,
+    Body, CacheInterceptor, CacheKey, Controller, Delete, Get, Post, Put, UseInterceptors
 } from '@nestjs/common'
 import { MessagePattern } from '@nestjs/microservices'
 import { CreateDto, UpdateDto } from '../dtos/product.dto'
@@ -40,7 +32,6 @@ export class ProductMicroController {
     createDto.image = product.image
     createDto.likes = product.likes
     const result = await this.productService.addProduct(createDto)
-
     return result
   }
 
