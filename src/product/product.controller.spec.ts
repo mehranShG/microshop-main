@@ -4,7 +4,7 @@ import { ProductController } from './product.controller'
 import { ProductService } from './product.service'
 
 const mockProductService = {
-  getAll: jest.fn().mockReturnValue([1, 2, 3, 4]),
+  getAll: jest.fn().mockResolvedValue([1, 2, 3, 4]),
   create: jest.fn().mockResolvedValue({ id: 1, title: 'tree.png' }),
   update: jest.fn().mockResolvedValue({ id: 2, title: 'trees.png' }),
   delete: jest.fn().mockResolvedValue({}),
@@ -31,8 +31,8 @@ describe('ProductController', () => {
   })
 
   describe('getAll', () => {
-    it('should be defined', () => {
-      expect(controller.getAll()).toEqual([1, 2, 3, 4])
+    it('should get all products', async () => {
+      expect(await controller.getAll()).toEqual([1, 2, 3, 4])
     })
   })
 
