@@ -1,5 +1,6 @@
 import { getModelToken } from '@nestjs/mongoose'
 import { Test, TestingModule } from '@nestjs/testing'
+import { UpdateDto } from '../dtos/product.dto'
 import { Product } from '../schemas/product.model'
 import { ProductService } from './product.service'
 
@@ -13,6 +14,11 @@ class MockProductModel {
   static find = jest.fn().mockReturnThis()
   static exec = jest.fn()
   static save = jest.fn().mockResolvedValue(1)
+
+  static findOneAndUpdate = jest.fn().mockResolvedValue({
+    id: 2,
+    name: 'orange',
+  })
 }
 
 const fakeCacheManger = {
@@ -52,5 +58,14 @@ describe('ProductService', () => {
   describe('findOne', () => {
     it('should get one product', async () =>
       expect(await service.findOne(1)).toEqual({ id: 1, name: 'apples' }))
+  })
+
+  describe('update', () => {
+    const productDto = new UpdateDto()
+    it('should update product', async () =>
+      expect(await service.update(1, productDto)).toEqual({
+        id: 1,
+        name: 'apples',
+      }))
   })
 })
