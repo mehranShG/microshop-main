@@ -48,4 +48,9 @@ describe('ProductService', () => {
     it('should get one product', async () =>
       expect(await service.getOne(1)).toEqual({ id: 1, name: 'apples' }))
   })
+
+  describe('findOne', () => {
+    it('should get one product', async () =>
+      expect(await service.findOne(1)).toEqual({ id: 1, name: 'apples' }))
+  })
 })
