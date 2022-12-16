@@ -8,6 +8,7 @@ const mockProductService = {
   create: jest.fn().mockResolvedValue({ id: 1, title: 'tree.png' }),
   update: jest.fn().mockResolvedValue({ id: 2, title: 'trees.png' }),
   delete: jest.fn().mockResolvedValue({}),
+  getOne: jest.fn().mockResolvedValue({ id: 1, name: 'apples' }),
 }
 
 describe('ProductController', () => {
@@ -58,6 +59,12 @@ describe('ProductController', () => {
     it('should delete product', async () => {
       const product = new CreateDto()
       expect(await controller.productDeleted(1)).toBeUndefined()
+    })
+  })
+
+  describe('getOne', () => {
+    it('should get a product', async () => {
+      expect(await controller.getOne(1)).toEqual({ id: 1, name: 'apples' })
     })
   })
 })
