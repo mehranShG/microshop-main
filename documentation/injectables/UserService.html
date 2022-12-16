@@ -312,12 +312,12 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { UpdateProfileDto } from &#x27;src/dtos/update-profile.dto&#x27;
-import { AuthEntity } from &#x27;src/entities/auth.entity&#x27;
-import { ResponseModel } from &#x27;src/interface/response.model&#x27;
-import { Repository } from &#x27;typeorm&#x27;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Repository } from &#x27;typeorm&#x27;
 import { Injectable } from &#x27;@nestjs/common&#x27;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;
+import { UpdateProfileDto } from &#x27;../dtos/update-profile.dto&#x27;
+import { AuthEntity } from &#x27;../entities/auth.entity&#x27;
+import { ResponseModel } from &#x27;../interface/response.model&#x27;
 
 @Injectable()
 export class UserService {

@@ -147,8 +147,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">src/product/product-microservice.controller.ts:37</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/product/product-microservice.controller.ts:29</a></div>
                 </td>
             </tr>
 
@@ -223,8 +223,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/product/product-microservice.controller.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="17"
+                            class="link-to-prism">src/product/product-microservice.controller.ts:17</a></div>
                 </td>
             </tr>
 
@@ -267,8 +267,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="31"
-                            class="link-to-prism">src/product/product-microservice.controller.ts:31</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/product/product-microservice.controller.ts:23</a></div>
                 </td>
             </tr>
 
@@ -345,8 +345,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="58"
-                            class="link-to-prism">src/product/product-microservice.controller.ts:58</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/product/product-microservice.controller.ts:49</a></div>
                 </td>
             </tr>
 
@@ -423,8 +423,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="49"
-                            class="link-to-prism">src/product/product-microservice.controller.ts:49</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">src/product/product-microservice.controller.ts:40</a></div>
                 </td>
             </tr>
 
@@ -478,15 +478,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Product } from &#x27;src/schemas/product.model&#x27;
 import {
-  Body,
-  CacheInterceptor,
-  CacheKey,
-  Controller,
-  Delete,
-  Get,
-  Post,
-  Put,
-  UseInterceptors,
+    Body, CacheInterceptor, CacheKey, Controller, Delete, Get, Post, Put, UseInterceptors
 } from &#x27;@nestjs/common&#x27;
 import { MessagePattern } from &#x27;@nestjs/microservices&#x27;
 import { CreateDto, UpdateDto } from &#x27;../dtos/product.dto&#x27;
@@ -518,7 +510,6 @@ export class ProductMicroController {
     createDto.image &#x3D; product.image
     createDto.likes &#x3D; product.likes
     const result &#x3D; await this.productService.addProduct(createDto)
-
     return result
   }
 
