@@ -6,7 +6,7 @@ import { ProductService } from './product.service'
 class MockProductModel {
   constructor(private data) {}
   new = jest.fn().mockResolvedValue(this.data)
-  static findOne = jest.fn(() => {})
+  static findOne = jest.fn().mockResolvedValue({ id: 1, name: 'apples' })
 
   // Important for chaining function with exec() should use mockReturnThis()
   // for previous function
@@ -16,7 +16,7 @@ class MockProductModel {
 }
 
 const fakeCacheManger = {
-  get: jest.fn().mockResolvedValue(1),
+  get: jest.fn().mockResolvedValue({ id: 1, name: 'apples' }),
   set: jest.fn().mockResolvedValue(1),
 }
 
@@ -41,6 +41,11 @@ describe('ProductService', () => {
 
   describe('getAll', () => {
     it('should get all products', async () =>
-      expect(await service.getAll()).toEqual(1))
+      expect(await service.getAll()).toEqual({ id: 1, name: 'apples' }))
+  })
+
+  describe('getOne', () => {
+    it('should get one product', async () =>
+      expect(await service.getOne(1)).toEqual({ id: 1, name: 'apples' }))
   })
 })
