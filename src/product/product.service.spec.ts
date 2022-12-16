@@ -8,21 +8,21 @@ class MockProductModel {
   constructor(private data) {}
   new = jest.fn().mockResolvedValue(this.data)
   static findOne = jest.fn().mockResolvedValue({ id: 1, name: 'apples' })
-
   // Important for chaining function with exec() should use mockReturnThis()
   // for previous function
   static find = jest.fn().mockReturnThis()
   static exec = jest.fn()
   static save = jest.fn().mockResolvedValue(1)
-
   static findOneAndUpdate = jest.fn().mockResolvedValue({
     id: 2,
     name: 'orange',
   })
+  static deleteOne = jest.fn().mockResolvedValue(true)
 }
 
 const fakeCacheManger = {
   get: jest.fn().mockResolvedValue({ id: 1, name: 'apples' }),
+
   set: jest.fn().mockResolvedValue(1),
 }
 
@@ -67,5 +67,11 @@ describe('ProductService', () => {
         id: 1,
         name: 'apples',
       }))
+  })
+
+  describe('delete', () => {
+    const productDto = new UpdateDto()
+    it('should delete product', async () =>
+      expect(await service.delete(1)).toBeTruthy)
   })
 })
