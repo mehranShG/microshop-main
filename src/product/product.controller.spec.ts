@@ -13,7 +13,6 @@ const mockProductService = {
 
 describe('ProductController', () => {
   let controller: ProductController
-
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ProductController],
@@ -22,7 +21,6 @@ describe('ProductController', () => {
       .overrideProvider(ProductService)
       .useValue(mockProductService)
       .compile()
-
     controller = module.get<ProductController>(ProductController)
   })
 
@@ -45,6 +43,7 @@ describe('ProductController', () => {
       })
     })
   })
+
   describe('productUpdated', () => {
     it('should update product', async () => {
       const product = new CreateDto()
