@@ -5,7 +5,7 @@ import { ProductService } from './product.service'
 
 const mockProductService = {
   getAll: jest.fn().mockResolvedValue([1, 2, 3, 4]),
-  create: jest.fn().mockResolvedValue({ id: 1, title: 'tree.png' }),
+  addProduct: jest.fn().mockResolvedValue({ id: 1, title: 'tree.png' }),
   update: jest.fn().mockResolvedValue({ id: 2, title: 'trees.png' }),
   delete: jest.fn().mockResolvedValue({}),
   getOne: jest.fn().mockResolvedValue({ id: 1, name: 'apples' }),
@@ -58,7 +58,7 @@ describe('ProductController', () => {
   describe('productDeleted', () => {
     it('should delete product', async () => {
       const product = new CreateDto()
-      expect(await controller.productDeleted(1)).toBeUndefined()
+      expect(await controller.productDeleted(1)).toEqual({})
     })
   })
 
