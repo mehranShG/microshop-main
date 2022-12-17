@@ -1,7 +1,9 @@
 import {
-    Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn
+    Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn,
+    UpdateDateColumn
 } from 'typeorm'
 import { AuthPass } from './auth-pass.entity'
+import { OrdersEntity } from './orders.entity'
 
 @Entity()
 export class AuthEntity {
@@ -41,4 +43,7 @@ export class AuthEntity {
   })
   @JoinColumn()
   authPass: AuthPass
+
+  @OneToMany(() => OrdersEntity, (order) => order.auth, { eager: true })
+  orders: OrdersEntity[]
 }
