@@ -8,6 +8,7 @@ import { AuthPass } from './entities/auth-pass.entity'
 import { AuthEntity } from './entities/auth.entity'
 import { ProductModule } from './product/product.module'
 import { UserModule } from './user/user.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { UserModule } from './user/user.module';
     ProductModule,
     AuthModule,
     UserModule,
+    OrdersModule,
   ],
   providers: [{ provide: APP_INTERCEPTOR, useClass: CacheInterceptor }],
 })
