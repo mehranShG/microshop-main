@@ -44,6 +44,9 @@ export class AuthEntity {
   @JoinColumn()
   authPass: AuthPass
 
-  @OneToMany(() => OrdersEntity, (order) => order.auth, { eager: true })
+  @OneToMany(() => OrdersEntity, (order) => order.auth, {
+    eager: true,
+    cascade: true,
+  })
   orders: OrdersEntity[]
 }

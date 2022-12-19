@@ -29,8 +29,7 @@ export class OrdersEntity {
   @UpdateDateColumn()
   updated_at: Date
 
-  @ManyToOne(() => AuthEntity, (auth) => auth.id, {
-    cascade: true,
+  @ManyToOne(() => AuthEntity, (auth) => auth.orders, {
     onDelete: 'CASCADE',
   })
   auth: AuthEntity
