@@ -1,5 +1,5 @@
 import {
-    CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn
+    Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn
 } from 'typeorm'
 import { AuthEntity } from './auth.entity'
 
@@ -13,6 +13,9 @@ export class OrdersEntity {
 
   @UpdateDateColumn()
   updated_at: Date
+
+  @Column({ default: false })
+  paid: boolean
 
   @ManyToOne(() => AuthEntity, (auth) => auth.id, {
     cascade: true,
