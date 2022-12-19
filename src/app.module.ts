@@ -6,7 +6,6 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { AuthModule } from './auth/auth.module'
 import { AuthPass } from './entities/auth-pass.entity'
 import { AuthEntity } from './entities/auth.entity'
-import { CartEntity } from './entities/cart.entity'
 import { OrdersEntity } from './entities/orders.entity'
 import { OrdersModule } from './orders/orders.module'
 import { ProductModule } from './product/product.module'
@@ -26,7 +25,7 @@ import { UserModule } from './user/user.module'
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [AuthEntity, AuthPass, OrdersEntity, CartEntity],
+        entities: [AuthEntity, AuthPass, OrdersEntity],
         synchronize: true,
       }),
       inject: [ConfigService],

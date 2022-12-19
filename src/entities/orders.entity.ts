@@ -1,13 +1,27 @@
 import {
-    Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn
+    Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn
 } from 'typeorm'
 import { AuthEntity } from './auth.entity'
-import { CartEntity } from './cart.entity'
 
 @Entity()
 export class OrdersEntity {
   @PrimaryGeneratedColumn()
   id: number
+
+  @Column()
+  product_id: number
+
+  @Column()
+  product_name: string
+
+  @Column()
+  quantity: number
+
+  @Column({ type: 'decimal' })
+  price: number
+
+  @Column({ default: false })
+  paid: boolean
 
   @CreateDateColumn()
   created_at: Date
@@ -15,17 +29,9 @@ export class OrdersEntity {
   @UpdateDateColumn()
   updated_at: Date
 
-  @Column({ default: false })
-  paid: boolean
-
   @ManyToOne(() => AuthEntity, (auth) => auth.id, {
     cascade: true,
     onDelete: 'CASCADE',
   })
   auth: AuthEntity
-
-  @OneToMany(() => CartEntity, (cart) => cart.order_id, {
-    eager: true,
-  })
-  cart: CartEntity[]
 }

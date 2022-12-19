@@ -20,7 +20,6 @@ export class OrdersService {
   async order(orderDtp: OrderDto) {
     const user = await this.authRepository.findOne({ where: { id: 1 } })
     if (user.orders.length === 0) {
-      return true
     }
   }
 }
