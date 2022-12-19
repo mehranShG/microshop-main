@@ -1,7 +1,8 @@
 import {
-    Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn
+    Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn
 } from 'typeorm'
 import { AuthEntity } from './auth.entity'
+import { CartEntity } from './cart.entity'
 
 @Entity()
 export class OrdersEntity {
@@ -22,4 +23,9 @@ export class OrdersEntity {
     onDelete: 'CASCADE',
   })
   auth: AuthEntity
+
+  @OneToMany(() => CartEntity, (cart) => cart.order_id, {
+    eager: true,
+  })
+  cart: CartEntity[]
 }

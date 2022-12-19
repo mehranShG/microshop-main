@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { OrdersEntity } from './orders.entity'
 
 @Entity()
 export class CartEntity {
@@ -16,4 +17,10 @@ export class CartEntity {
 
   @Column({ type: 'decimal' })
   price: number
+
+  @ManyToOne(() => OrdersEntity, (order) => order.id, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  order_id: OrdersEntity
 }
