@@ -9,4 +9,9 @@ export class OrdersService {
     @InjectRepository(AuthEntity)
     private readonly authRepository: Repository<AuthEntity>,
   ) {}
+
+  async getOrder() {
+    const user = await this.authRepository.findOne({ where: { id: 1 } })
+    return user.orders
+  }
 }
