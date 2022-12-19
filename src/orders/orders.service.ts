@@ -14,4 +14,6 @@ export class OrdersService {
     const user = await this.authRepository.findOne({ where: { id: 1 } })
     return user.orders
   }
+
+  async order() {}
 }
