@@ -1,3 +1,4 @@
+import { OrderDto } from 'src/dtos/order.dto'
 import { AuthEntity } from 'src/entities/auth.entity'
 import { Repository } from 'typeorm'
 import { Injectable } from '@nestjs/common'
@@ -10,10 +11,16 @@ export class OrdersService {
     private readonly authRepository: Repository<AuthEntity>,
   ) {}
 
+  // TODO jwt user id
   async getOrder() {
     const user = await this.authRepository.findOne({ where: { id: 1 } })
     return user.orders
   }
 
-  async order() {}
+  async order(orderDtp: OrderDto) {
+    const user = await this.authRepository.findOne({ where: { id: 1 } })
+    if (user.orders.length === 0) {
+      return true
+    }
+  }
 }
