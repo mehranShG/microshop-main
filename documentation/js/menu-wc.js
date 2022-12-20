@@ -93,6 +93,37 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                             </li>
                             <li class="link">
+                                <a href="modules/OrdersModule.html" data-type="entity-link" >OrdersModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                            'data-target="#controllers-links-module-OrdersModule-0030ec66b815813beacbd438e1a05a44b10bdb78fe5c52cf13c7f84c3c7ae9c41b7e5b7d65936ffef4da47681e407b24c3c821c21735bda10ca03eb23064d1d8"' : 'data-target="#xs-controllers-links-module-OrdersModule-0030ec66b815813beacbd438e1a05a44b10bdb78fe5c52cf13c7f84c3c7ae9c41b7e5b7d65936ffef4da47681e407b24c3c821c21735bda10ca03eb23064d1d8"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-OrdersModule-0030ec66b815813beacbd438e1a05a44b10bdb78fe5c52cf13c7f84c3c7ae9c41b7e5b7d65936ffef4da47681e407b24c3c821c21735bda10ca03eb23064d1d8"' :
+                                            'id="xs-controllers-links-module-OrdersModule-0030ec66b815813beacbd438e1a05a44b10bdb78fe5c52cf13c7f84c3c7ae9c41b7e5b7d65936ffef4da47681e407b24c3c821c21735bda10ca03eb23064d1d8"' }>
+                                            <li class="link">
+                                                <a href="controllers/OrdersController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >OrdersController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#injectables-links-module-OrdersModule-0030ec66b815813beacbd438e1a05a44b10bdb78fe5c52cf13c7f84c3c7ae9c41b7e5b7d65936ffef4da47681e407b24c3c821c21735bda10ca03eb23064d1d8"' : 'data-target="#xs-injectables-links-module-OrdersModule-0030ec66b815813beacbd438e1a05a44b10bdb78fe5c52cf13c7f84c3c7ae9c41b7e5b7d65936ffef4da47681e407b24c3c821c21735bda10ca03eb23064d1d8"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-OrdersModule-0030ec66b815813beacbd438e1a05a44b10bdb78fe5c52cf13c7f84c3c7ae9c41b7e5b7d65936ffef4da47681e407b24c3c821c21735bda10ca03eb23064d1d8"' :
+                                        'id="xs-injectables-links-module-OrdersModule-0030ec66b815813beacbd438e1a05a44b10bdb78fe5c52cf13c7f84c3c7ae9c41b7e5b7d65936ffef4da47681e407b24c3c821c21735bda10ca03eb23064d1d8"' }>
+                                        <li class="link">
+                                            <a href="injectables/OrdersService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >OrdersService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
                                 <a href="modules/ProductModule.html" data-type="entity-link" >ProductModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
@@ -176,6 +207,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <li class="link">
                                     <a href="entities/AuthPass.html" data-type="entity-link" >AuthPass</a>
                                 </li>
+                                <li class="link">
+                                    <a href="entities/OrdersEntity.html" data-type="entity-link" >OrdersEntity</a>
+                                </li>
                             </ul>
                         </li>
                     <li class="chapter">
@@ -191,6 +225,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="classes/LoginDto.html" data-type="entity-link" >LoginDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/OrderDto.html" data-type="entity-link" >OrderDto</a>
                             </li>
                             <li class="link">
                                 <a href="classes/Product.html" data-type="entity-link" >Product</a>
