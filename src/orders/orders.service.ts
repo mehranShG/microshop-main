@@ -30,7 +30,13 @@ export class OrdersService {
     return result
   }
 
+  //todo jwt
   async deleteOrder(id: number) {
-    await this.authRepository.delete(id)
+    const user = await this.authRepository.findOneBy({ id: 1 })
+    // Find index to remove from parrent side
+    const getIndex = user.orders.findIndex((order) => order.id == id)
+    user.orders.splice(getIndex, 1)
+    const result = await this.authRepository.save(user)
+    return result
   }
 }

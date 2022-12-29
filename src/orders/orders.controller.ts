@@ -1,5 +1,5 @@
 import { OrderDto } from 'src/dtos/order.dto'
-import { Body, Controller, Get, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 import { OrdersService } from './orders.service'
 
@@ -16,5 +16,10 @@ export class OrdersController {
   @Post()
   order(@Body() orderDto: OrderDto) {
     return this.ordersService.order(orderDto)
+  }
+
+  @Delete(':id')
+  deleteOrder(@Param('id') id: number) {
+    return this.ordersService.deleteOrder(id)
   }
 }
