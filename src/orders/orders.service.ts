@@ -13,12 +13,12 @@ export class OrdersService {
   ) {}
 
   // TODO jwt user id
-  async getOrder() {
+  async getOrder(): Promise<OrdersEntity[]> {
     const user = await this.authRepository.findOne({ where: { id: 1 } })
     return user.orders
   }
 
-  async order(orderDto: OrderDto) {
+  async order(orderDto: OrderDto): Promise<AuthEntity> {
     const user = await this.authRepository.findOneBy({ id: 1 })
     const order = new OrdersEntity()
     order.product_id = orderDto.product_id
@@ -26,6 +26,16 @@ export class OrdersService {
     order.price = orderDto.price
     order.quantity = orderDto.quantity
     user.orders.push(order)
+    const result = await this.authRepository.save(user)
+    return result
+  }
+
+  //todo jwt
+  async deleteOrder(id: number): Promise<AuthEntity> {
+    const user = await this.authRepository.findOneBy({ id: 1 })
+    // Find index to remove from parrent side
+    const getIndex = user.orders.findIndex((order) => order.id == id)
+    user.orders.splice(getIndex, 1)
     const result = await this.authRepository.save(user)
     return result
   }

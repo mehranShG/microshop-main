@@ -10,7 +10,6 @@ import { OrdersEntity } from './entities/orders.entity'
 import { OrdersModule } from './orders/orders.module'
 import { ProductModule } from './product/product.module'
 import { UserModule } from './user/user.module'
-import { FinanceModule } from './finance/finance.module';
 
 @Module({
   imports: [
@@ -35,7 +34,6 @@ import { FinanceModule } from './finance/finance.module';
     AuthModule,
     UserModule,
     OrdersModule,
-    FinanceModule,
   ],
   providers: [{ provide: APP_INTERCEPTOR, useClass: CacheInterceptor }],
 })
