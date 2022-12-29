@@ -29,4 +29,8 @@ export class OrdersService {
     const result = await this.authRepository.save(user)
     return result
   }
+
+  async deleteOrder(id: number) {
+    await this.authRepository.delete(id)
+  }
 }
