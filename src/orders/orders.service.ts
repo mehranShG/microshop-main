@@ -12,12 +12,21 @@ export class OrdersService {
     private readonly authRepository: Repository<AuthEntity>,
   ) {}
 
-  // TODO jwt user id
+  /**
+   * Get an order
+   * @returns A promise of order array
+   */
+
   async getOrder(): Promise<OrdersEntity[]> {
     const user = await this.authRepository.findOne({ where: { id: 1 } })
     return user.orders
   }
 
+  /**
+   * Saves an order
+   * @param orderDto Requires id name quantity
+   * @returns A array of user with order
+   */
   async order(orderDto: OrderDto): Promise<AuthEntity> {
     const user = await this.authRepository.findOneBy({ id: 1 })
     const order = new OrdersEntity()
@@ -30,7 +39,11 @@ export class OrdersService {
     return result
   }
 
-  //todo jwt
+  /**
+   * Deletes an order
+   * @param id
+   * @returns A promise of user array
+   */
   async deleteOrder(id: number): Promise<AuthEntity> {
     const user = await this.authRepository.findOneBy({ id: 1 })
     // Find index to remove from parrent side
